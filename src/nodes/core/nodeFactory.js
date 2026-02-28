@@ -1,21 +1,31 @@
 import * as configs from '../configs';
 import { GenericNode } from './GenericNode';
+
+import { InputNode } from '../special/inputNode';
+import { OutputNode } from '../special/outputNode';
+import { LLMNode } from '../special/llmNode';
 import { TextNode } from '../special/textNode';
+
+// Spcical Node
+const specialNodes = {
+  customInput: InputNode,
+  customOutput: OutputNode,
+  llm: LLMNode,
+  text: TextNode,
+};
 
 export const buildNodeTypes = () => {
   const nodeTypes = {};
 
-  Object.values(configs).forEach((configModule) => {
-    // const config = configModule.default;
-    const config = configModule;
-
+  // Config auto generation
+  Object.values(configs).forEach((config) => {
     nodeTypes[config.type] = (props) => (
       <GenericNode {...props} config={config} />
     );
   });
 
-  // special node override
-  nodeTypes['text'] = TextNode;
+  // Insert special node
+  Object.assign(nodeTypes, specialNodes);
 
   return nodeTypes;
 };
