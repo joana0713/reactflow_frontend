@@ -1,3 +1,5 @@
+// GenericNode.js
+
 import { useState } from 'react';
 import { useStore } from '../../store';
 import { BaseNode } from '../core/BaseNode';

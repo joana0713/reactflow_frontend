@@ -1,4 +1,4 @@
-import React from 'react';
+// FieldRenderer.js
 
 export const FieldRenderer = ({ field, value, onChange }) => {
   const handleChange = (e) => {
