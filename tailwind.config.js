@@ -6,12 +6,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#6366F1",     // indigo-500
-        surface: "#0F172A",     // slate-900
-        card: "#1E293B",        // slate-800
-        border: "#334155",      // slate-700
+        surface: "#0B1120",      // main canvas
+        card: "#111827",         // node background
+        border: "#1F2937",       // subtle border
+        muted: "#9CA3AF",        // secondary text
+        primary: "#6366F1",      // accent
       }
-    },
+    }
   },
   plugins: [],
 }
