@@ -1,18 +1,17 @@
-// boolean.config.js
-
-export default {
+const booleanConfig = {
   type: 'boolean',
-  title: 'Boolean',
-  handles: {
-    inputs: [],
-    outputs: [{ id: 'value' }],
-  },
+  label: 'Boolean',
+  inputs: [],
+  outputs: ['value'],
   fields: [
     {
-      type: 'checkbox',
       name: 'value',
       label: 'True / False',
-      defaultValue: false,
-    },
-  ],
+      type: 'select',
+      options: ['true', 'false'],
+      default: 'true'
+    }
+  ]
 };
+
+export default booleanConfig;

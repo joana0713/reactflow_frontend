@@ -58,7 +58,7 @@ export const BaseNode = ({
       </div>
 
       {/* 🔹 Body */}
-      <div className="p-4 text-sm text-gray-700">
+      <div className="p-4 text-sm text-gray-700 min-h-[60px]">
         {children}
       </div>
 

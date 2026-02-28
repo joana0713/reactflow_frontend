@@ -6,7 +6,6 @@ export const SubmitButton = () => {
 
   const handleSubmit = async () => {
     try {
-      // 🔥 backend가 원하는 형식으로 변환
       const payload = {
         nodes: nodes.map((node) => ({
           id: node.id
@@ -16,8 +15,6 @@ export const SubmitButton = () => {
           target: edge.target
         }))
       };
-
-      console.log(payload)
 
       const response = await fetch('http://127.0.0.1:8000/pipelines/parse', {
         method: 'POST',
@@ -34,8 +31,8 @@ export const SubmitButton = () => {
       );
 
     } catch (error) {
-      console.error('Error:', error);
-      alert('Submission failed');
+      console.error('Pipeline parse failed:', error);
+      alert('Backend server is not running or an error occurred.');
     }
   };
 
@@ -84,9 +81,8 @@ export const SubmitButton = () => {
           "
         />
 
-        {/* Text */}
         <span className="relative tracking-wide">
-          🚀 Submit Pipeline
+          Submit Pipeline
         </span>
       </button>
     </div>

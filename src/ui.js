@@ -62,6 +62,7 @@ export const PipelineUI = () => {
       const type = appData?.nodeType;
       if (!type) return;
 
+      if (!reactFlowInstance || !reactFlowWrapper.current) return;
       const position = reactFlowInstance.project({
         x: event.clientX - reactFlowBounds.left,
         y: event.clientY - reactFlowBounds.top,

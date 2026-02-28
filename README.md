@@ -97,3 +97,17 @@ This project focuses on:
 ---
 
 Built for assignment submission.
+
+## Backend Setup
+
+Start the backend server on port 8000:
+
+```bash
+uvicorn main:app --reload --port 8000
+```
+
+The frontend sends requests to:
+
+POST /pipelines/parse
+
+Make sure the backend is running before testing the Parse functionality.
