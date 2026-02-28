@@ -42,9 +42,7 @@ export const useStore = create((set, get) => ({
             ...connection,
             type: 'smoothstep',
             animated: true,
-            markerEnd: {
-              type: MarkerType.Arrow,
-            }
+            markerEnd: { type: MarkerType.Arrow },
           },
           get().edges
         ),

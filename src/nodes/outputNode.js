@@ -24,7 +24,8 @@ export const OutputNode = ({ id, data }) => {
       <Handle
         type="target"
         position={Position.Left}
-        id={`${id}-value`}
+        // id={`${id}-value`}
+        id={`${id}-input`}
       />
 
       <div>

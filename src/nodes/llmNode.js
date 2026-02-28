@@ -1,43 +1,33 @@
 import { Handle, Position } from 'reactflow';
 
 export const LLMNode = ({ id, data }) => {
-
   return (
     <div
       style={{
-        width: 200,
-        height: 100,
+        width: 250,
+        padding: 10,
         border: '1px solid black',
         position: 'relative'
       }}
     >
-      {/* 첫번째 target */}
       <Handle
         type="target"
         position={Position.Left}
-        id={`${id}-system`}
-        style={{ top: 25 }}
+        id={`${id}-target`}
+        style={{ top: '50%', transform: 'translateY(-50%)' }}
       />
 
-      {/* 두번째 target */}
-      <Handle
-        type="target"
-        position={Position.Left}
-        id={`${id}-prompt`}
-        style={{ top: 60 }}
-      />
-
-      <div style={{ padding: 10 }}>
-        <div>LLM</div>
-        <div>This is a LLM.</div>
+      <div>
+        <strong>LLM</strong>
       </div>
 
-      {/* 오른쪽 source */}
+      <div>This is a LLM.</div>
+
       <Handle
         type="source"
         position={Position.Right}
-        id={`${id}-response`}
-        style={{ top: 45 }}
+        id={`${id}-source`}
+        style={{ top: '50%', transform: 'translateY(-50%)' }}
       />
     </div>
   );

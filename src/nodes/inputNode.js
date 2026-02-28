@@ -40,7 +40,8 @@ export const InputNode = ({ id, data }) => {
       <Handle
         type="source"
         position={Position.Right}
-        id={`${id}-value`}
+        // id={`${id}-value`}
+        id={`${id}-output`}
       />
     </div>
   );
