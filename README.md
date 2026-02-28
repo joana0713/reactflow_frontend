@@ -1,39 +1,99 @@
-# Frontend – DAG Workflow Builder (Client)
+# 🧩 Pipeline Builder
 
-## Overview
+A drag-and-drop visual pipeline builder built with React and React Flow.
 
-This frontend is a visual workflow builder built with React and ReactFlow.
-
-It allows users to:
-
-- Create nodes (Input, LLM, Output, Text)
-- Connect nodes visually
-- Construct arbitrary directed graphs
-- Submit the graph structure to the backend for validation
-
-The purpose is not only UI rendering, but enabling proper Directed Acyclic Graph (DAG) testing.
+This project demonstrates dynamic node rendering, configurable node types, and a scalable UI architecture using Tailwind CSS.
 
 ---
 
-## Tech Stack
+## 🚀 Features
 
-- React
-- ReactFlow
-- Zustand (state management)
+- Drag & Drop node creation
+- Dynamic input/output handles
+- Config-driven generic nodes
+- Specialized nodes (Input, Output, LLM, Text)
+- Variable extraction from TextNode (`{{variable}}`)
+- Sidebar-based node palette
+- Fully styled with Tailwind CSS (no inline design styles)
 
 ---
 
-## Architecture
+## 🏗 Architecture
 
-Graph state is stored in Zustand:
+### 1. BaseNode
+All nodes share a unified card layout using `BaseNode`.
 
-- `nodes[]`
-- `edges[]`
+- Dynamic handles
+- Consistent design
+- Reusable layout
 
-When the user clicks **Submit**, the frontend sends:
+### 2. Special Nodes
+Custom logic nodes:
+- InputNode
+- OutputNode
+- LLMNode
+- TextNode (dynamic variable parsing)
 
-```json
-{
-  "nodes": [...],
-  "edges": [...]
-}
+### 3. Generic Nodes
+Advanced nodes are rendered via configuration:
+- Number
+- Boolean
+- Filter
+- Transform
+- Merge
+
+Each node is defined through a configuration object and rendered dynamically.
+
+---
+
+## 🎨 Styling
+
+- Tailwind CSS
+- Sidebar layout
+- Responsive design
+- Shadow + hover effects
+- Consistent spacing system
+
+Inline styling is only used where dynamic positioning is required (e.g., handle alignment).
+
+---
+
+## 🧠 Technical Highlights
+
+- Zustand for state management
+- React Flow for graph rendering
+- Dynamic handle positioning
+- Config-driven UI rendering
+- Modular node architecture
+
+---
+
+## 📦 Installation
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+## 📝 Notes
+
+This project focuses on:
+- Clean architecture
+- UI consistency
+- Extensibility
+- Maintainable node configuration structure
+
+---
+
+## 📌 Future Improvements
+
+- Node color themes
+- Node duplication & deletion controls
+- Save / Load pipeline
+- Backend execution engine
+
+---
+
+Built for assignment submission.
