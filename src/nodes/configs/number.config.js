@@ -1,3 +1,5 @@
+// number.config.js
+
 export default {
   type: 'number',
   title: 'Number',

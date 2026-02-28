@@ -1,3 +1,5 @@
+// boolean.config.js
+
 export default {
   type: 'boolean',
   title: 'Boolean',

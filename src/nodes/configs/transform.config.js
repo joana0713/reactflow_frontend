@@ -1,3 +1,5 @@
+// transform.config.js
+
 export default {
   type: 'transform',
   title: 'Transform',

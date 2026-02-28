@@ -1,3 +1,5 @@
+// filter.config.js
+
 export default {
   type: 'filter',
   title: 'Filter',

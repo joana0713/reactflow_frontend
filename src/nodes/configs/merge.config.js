@@ -1,3 +1,5 @@
+// merge.config.js
+
 export default {
   type: 'merge',
   title: 'Merge',

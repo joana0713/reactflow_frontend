@@ -1,3 +1,5 @@
+// index.js
+
 export { default as boolean } from './boolean.config';
 export { default as number } from './number.config';
 export { default as filter } from './filter.config';
