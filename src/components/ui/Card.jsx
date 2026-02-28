@@ -1,17 +1,19 @@
 export default function Card({ children }) {
   return (
-    <div className="
-      bg-white
-      text-slate-800
-      rounded-2xl
-      shadow-lg
-      border border-slate-200
-      min-w-[240px]
-      p-5
-      transition
-      hover:shadow-xl
-    ">
-      {children}
+    <div
+        className="
+            bg-card
+            border border-border
+            rounded-2xl
+            p-5
+            min-w-[260px]
+            shadow-lg
+            transition
+            hover:shadow-xl
+            !bg-card
+        "
+        >
+        {children}
     </div>
   );
 }

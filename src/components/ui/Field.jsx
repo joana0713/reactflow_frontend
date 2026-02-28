@@ -1,7 +1,7 @@
 export function Field({ label, children }) {
   return (
-    <div className="mb-3">
-      <label className="block text-sm font-medium text-slate-600 mb-1">
+    <div className="mb-4">
+      <label className="block text-xs font-medium text-muted mb-1 uppercase tracking-wide">
         {label}
       </label>
       {children}

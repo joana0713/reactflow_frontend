@@ -15,13 +15,13 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
-
-import 'reactflow/dist/style.css';
+import { NumberNode } from './nodes/numberNode';
 import { BooleanNode } from './nodes/booleanNode';
 import { FilterNode } from './nodes/filterNode';
-import { MergeNode } from './nodes/mergeNode';
-import { NumberNode } from './nodes/numberNode';
 import { TransformNode } from './nodes/transformNode';
+import { MergeNode } from './nodes/mergeNode';
+
+import 'reactflow/dist/style.css';
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
@@ -31,11 +31,11 @@ const nodeTypes = {
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
+  number: NumberNode,
   boolean: BooleanNode,
   filter: FilterNode,
+  transform: TransformNode,
   merge: MergeNode,
-  number: NumberNode,
-  transform: TransformNode
 };
 
 const selector = (state) => ({
@@ -45,7 +45,7 @@ const selector = (state) => ({
   addNode: state.addNode,
   onNodesChange: state.onNodesChange,
   onEdgesChange: state.onEdgesChange,
-  onConnect: state.onConnect,
+  onConnect: state.onConnect
 });
 
 export const PipelineUI = () => {
