@@ -40,8 +40,55 @@ export const SubmitButton = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
-      <button onClick={handleSubmit}>Submit</button>
+    <div className="flex justify-center mt-8">
+      <button
+        onClick={handleSubmit}
+        className="
+          group
+          relative
+          inline-flex
+          items-center
+          justify-center
+          px-10
+          py-3
+          text-sm
+          font-semibold
+          text-white
+          rounded-2xl
+          bg-gradient-to-r
+          from-blue-500
+          via-indigo-500
+          to-purple-600
+          shadow-lg
+          transition-all
+          duration-300
+          hover:shadow-2xl
+          hover:scale-105
+          active:scale-95
+          focus:outline-none
+          focus:ring-4
+          focus:ring-indigo-300
+        "
+      >
+        {/* Glow effect */}
+        <span
+          className="
+            absolute
+            inset-0
+            rounded-2xl
+            bg-white
+            opacity-0
+            group-hover:opacity-10
+            transition-opacity
+            duration-300
+          "
+        />
+
+        {/* Text */}
+        <span className="relative tracking-wide">
+          🚀 Submit Pipeline
+        </span>
+      </button>
     </div>
   );
 };

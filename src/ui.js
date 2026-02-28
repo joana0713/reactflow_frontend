@@ -11,12 +11,6 @@ import ReactFlow, {
 } from 'reactflow';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
-// import { InputNode } from './nodes/special/inputNode';
-// import { LLMNode } from './nodes/special/llmNode';
-// import { OutputNode } from './nodes/special/outputNode';
-// import { TextNode } from './nodes/special/textNode';
-
-// import { nodeTypes } from './nodes/configs';
 import { getNodeTypes } from './nodes';
 import 'reactflow/dist/style.css';
 
@@ -25,13 +19,6 @@ const nodeTypes = getNodeTypes();
 
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
-
-// const nodeTypes = {
-//   customInput: InputNode,
-//   llm: LLMNode,
-//   customOutput: OutputNode,
-//   text: TextNode,
-// };
 
 const selector = (state) => ({
   nodes: state.nodes,
