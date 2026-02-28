@@ -1,20 +1,20 @@
-// inputNode.js
+// outputNode.js
 
 import { useState } from 'react';
-import { BaseNode } from './baseNode';
+import { BaseNode } from '../core/BaseNode';
 
-export const InputNode = ({ id, data }) => {
+export const OutputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(
-    data?.inputName || id.replace('customInput-', 'input_')
+    data?.outputName || id.replace('customOutput-', 'output_')
   );
-  const [inputType, setInputType] = useState(
-    data?.inputType || 'Text'
+  const [outputType, setOutputType] = useState(
+    data?.outputType || 'Text'
   );
 
   return (
     <BaseNode
       id={id}
-      title="Input"
+      title="Output"
       inputs={[{ id: `${id}-target` }]}
       outputs={[{ id: `${id}-source` }]}
     >
@@ -33,11 +33,11 @@ export const InputNode = ({ id, data }) => {
         <label>
           Type:
           <select
-            value={inputType}
-            onChange={(e) => setInputType(e.target.value)}
+            value={outputType}
+            onChange={(e) => setOutputType(e.target.value)}
           >
             <option value="Text">Text</option>
-            <option value="File">File</option>
+            <option value="File">Image</option>
           </select>
         </label>
       </div>

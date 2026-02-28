@@ -1,7 +1,7 @@
 // textNode.js
 
 import { useState, useEffect, useRef } from 'react';
-import { BaseNode } from './baseNode';
+import { BaseNode } from '../core/BaseNode';
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
