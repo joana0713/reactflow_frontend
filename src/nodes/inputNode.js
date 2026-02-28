@@ -37,11 +37,24 @@ export const InputNode = ({ id, data }) => {
           </select>
         </label>
       </div>
-      <Handle
+      {/* <Handle
         type="source"
         position={Position.Right}
         // id={`${id}-value`}
         id={`${id}-output`}
+      /> */}
+      <Handle
+        type="target"
+        position={Position.Left}
+        id={`${id}-target`}
+        style={{ top: '50%', transform: 'translateY(-50%)' }}
+      />
+
+      <Handle
+        type="source"
+        position={Position.Right}
+        id={`${id}-source`}
+        style={{ top: '50%', transform: 'translateY(-50%)' }}
       />
     </div>
   );

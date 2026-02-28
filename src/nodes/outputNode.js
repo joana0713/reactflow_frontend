@@ -20,12 +20,25 @@ export const OutputNode = ({ id, data }) => {
   return (
     <div style={{ width: 200, height: 80, border: '1px solid black' }}>
       
-      {/* ✅ Output은 target이어야 한다 */}
-      <Handle
+      {/* <Handle
         type="target"
         position={Position.Left}
         // id={`${id}-value`}
         id={`${id}-input`}
+      /> */}
+
+      <Handle
+        type="target"
+        position={Position.Left}
+        id={`${id}-target`}
+        style={{ top: '50%', transform: 'translateY(-50%)' }}
+      />
+
+      <Handle
+        type="source"
+        position={Position.Right}
+        id={`${id}-source`}
+        style={{ top: '50%', transform: 'translateY(-50%)' }}
       />
 
       <div>
