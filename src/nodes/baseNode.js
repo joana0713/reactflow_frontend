@@ -28,7 +28,7 @@ export const BaseNode = ({
           position={Position.Left}
           id={input.id}
           style={{
-            top: `${50 + index * 20}%`,
+            top: input.style?.top ?? `${50 + index * 20}%`,
             transform: 'translateY(-50%)'
           }}
         />
@@ -52,7 +52,7 @@ export const BaseNode = ({
           position={Position.Right}
           id={output.id}
           style={{
-            top: `${50 + index * 20}%`,
+            top: output.style?.top ?? `${50 + index * 20}%`,
             transform: 'translateY(-50%)'
           }}
         />
