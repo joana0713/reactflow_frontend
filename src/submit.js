@@ -40,7 +40,7 @@ export const SubmitButton = () => {
   };
 
   return (
-    <div className="flex justify-center mt-8">
+    <div className="flex justify-center">
       <button
         onClick={handleSubmit}
         className="

@@ -10,7 +10,9 @@ export const LLMNode = ({ id }) => {
       inputs={[{ id: `${id}-target` }]}
       outputs={[{ id: `${id}-source` }]}
     >
-      <div>This is a LLM.</div>
+      <div className="text-sm text-gray-600 bg-indigo-50 px-3 py-2 rounded-lg">
+        This is a LLM.
+      </div>
     </BaseNode>
   );
 };

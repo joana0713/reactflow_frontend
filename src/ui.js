@@ -16,7 +16,6 @@ import 'reactflow/dist/style.css';
 
 const nodeTypes = getNodeTypes();
 
-
 const gridSize = 20;
 const proOptions = { hideAttribution: true };
 
@@ -52,8 +51,11 @@ export const PipelineUI = () => {
     (event) => {
       event.preventDefault();
 
-      const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
-      const raw = event?.dataTransfer?.getData('application/reactflow');
+      const reactFlowBounds =
+        reactFlowWrapper.current.getBoundingClientRect();
+
+      const raw =
+        event?.dataTransfer?.getData('application/reactflow');
       if (!raw) return;
 
       const appData = JSON.parse(raw);
@@ -76,7 +78,7 @@ export const PipelineUI = () => {
 
       addNode(newNode);
     },
-    [reactFlowInstance]
+    [reactFlowInstance, getNodeID, addNode]
   );
 
   const onDragOver = useCallback((event) => {
@@ -87,7 +89,7 @@ export const PipelineUI = () => {
   return (
     <div
       ref={reactFlowWrapper}
-      style={{ width: '100vw', height: '70vh' }} 
+      className="w-screen h-[70vh] bg-gray-50"
     >
       <ReactFlow
         nodes={nodes}
@@ -100,11 +102,17 @@ export const PipelineUI = () => {
         onInit={setReactFlowInstance}
         nodeTypes={nodeTypes}
         proOptions={proOptions}
+        snapToGrid
         snapGrid={[gridSize, gridSize]}
         connectionLineType="smoothstep"
         connectionMode={ConnectionMode.Strict}
+        className="bg-gray-50"
       >
-        <Background color="#aaa" gap={gridSize} />
+        <Background
+          gap={gridSize}
+          size={1}
+          color="#e5e7eb"
+        />
         <Controls />
         <MiniMap />
       </ReactFlow>

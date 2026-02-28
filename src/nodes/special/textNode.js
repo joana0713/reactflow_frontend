@@ -12,7 +12,6 @@ export const TextNode = ({ id, data }) => {
     setCurrText(e.target.value);
   };
 
-  // 🔹 Extract variables with line index
   useEffect(() => {
     const lines = currText.split('\n');
     const variableMap = new Map();
@@ -58,12 +57,20 @@ export const TextNode = ({ id, data }) => {
         ref={textareaRef}
         value={currText}
         onChange={handleTextChange}
-        style={{
-          width: '100%',
-          resize: 'none',
-          overflow: 'hidden'
-        }}
         rows={1}
+        className="
+          w-full
+          resize-none
+          overflow-hidden
+          px-3 py-2
+          text-sm
+          border border-gray-200
+          rounded-lg
+          focus:outline-none
+          focus:ring-2
+          focus:ring-purple-400
+          transition
+        "
         onInput={(e) => {
           e.target.style.height = 'auto';
           e.target.style.height = e.target.scrollHeight + 'px';

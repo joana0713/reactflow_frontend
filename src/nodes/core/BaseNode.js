@@ -11,14 +11,17 @@ export const BaseNode = ({
 }) => {
   return (
     <div
-      style={{
-        minWidth: 220,
-        padding: 10,
-        border: '1px solid black',
-        background: 'white',
-        position: 'relative',
-        borderRadius: 6
-      }}
+      className="
+        relative
+        min-w-[220px]
+        bg-white
+        border border-gray-200
+        rounded-2xl
+        shadow-md
+        hover:shadow-xl
+        transition-all
+        duration-200
+      "
     >
       {/* 🔹 Left Handles */}
       {inputs.map((input, index) => {
@@ -34,15 +37,28 @@ export const BaseNode = ({
               top: customTop ?? `${50 + index * 20}%`,
               transform: customTop ? undefined : 'translateY(-50%)'
             }}
+            className="!w-3 !h-3 !bg-blue-500"
           />
         );
       })}
 
-      <div style={{ fontWeight: 'bold', marginBottom: 8 }}>
+      {/* 🔹 Header */}
+      <div
+        className="
+          px-4 py-3
+          border-b border-gray-100
+          bg-gray-50
+          rounded-t-2xl
+          font-semibold
+          text-sm
+          text-gray-700
+        "
+      >
         {title}
       </div>
 
-      <div>
+      {/* 🔹 Body */}
+      <div className="p-4 text-sm text-gray-700">
         {children}
       </div>
 
@@ -60,6 +76,7 @@ export const BaseNode = ({
               top: customTop ?? `${50 + index * 20}%`,
               transform: customTop ? undefined : 'translateY(-50%)'
             }}
+            className="!w-3 !h-3 !bg-green-500"
           />
         );
       })}

@@ -36,31 +36,39 @@ export const GenericNode = ({ data, config }) => {
 
       {/* Body */}
       <div className="p-4 space-y-4">
-        {config.fields?.map((field) => (
-          <div key={field.name} className="flex flex-col gap-1">
-            <label className="text-xs font-medium text-gray-500">
-              {field.label}
-            </label>
+        {config.fields && config.fields.length > 0 ? (
+          <div>
+            {config.fields?.map((field) => (
+              <div key={field.name} className="flex flex-col gap-1">
+                <label className="text-xs font-medium text-gray-500">
+                  {field.label}
+                </label>
 
-            <input
-              type="text"
-              defaultValue={field.default}
-              className="
-                px-3
-                py-2
-                text-sm
-                border
-                border-gray-200
-                rounded-lg
-                focus:outline-none
-                focus:ring-2
-                focus:ring-blue-400
-                focus:border-transparent
-                transition
-              "
-            />
+                <input
+                  type="text"
+                  defaultValue={field.default}
+                  className="
+                    px-3
+                    py-2
+                    text-sm
+                    border
+                    border-gray-200
+                    rounded-lg
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-blue-400
+                    focus:border-transparent
+                    transition
+                  "
+                />
+              </div>
+            ))}
           </div>
-        ))}
+        ) : (
+          <div className="text-xs text-gray-400 italic">
+            No configuration
+          </div>
+        )}
       </div>
 
       {/* Input Handle */}
