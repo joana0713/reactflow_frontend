@@ -1,61 +1,46 @@
 // inputNode.js
 
 import { useState } from 'react';
-import { Handle, Position } from 'reactflow';
+import { BaseNode } from './baseNode';
 
 export const InputNode = ({ id, data }) => {
-  const [currName, setCurrName] = useState(data?.inputName || id.replace('customInput-', 'input_'));
-  const [inputType, setInputType] = useState(data.inputType || 'Text');
-
-  const handleNameChange = (e) => {
-    setCurrName(e.target.value);
-  };
-
-  const handleTypeChange = (e) => {
-    setInputType(e.target.value);
-  };
+  const [currName, setCurrName] = useState(
+    data?.inputName || id.replace('customInput-', 'input_')
+  );
+  const [inputType, setInputType] = useState(
+    data?.inputType || 'Text'
+  );
 
   return (
-    <div style={{width: 200, height: 80, border: '1px solid black'}}>
-      <div>
-        <span>Input</span>
-      </div>
+    <BaseNode
+      id={id}
+      title="Input"
+      inputs={[{ id: `${id}-target` }]}
+      outputs={[{ id: `${id}-source` }]}
+    >
       <div>
         <label>
           Name:
-          <input 
-            type="text" 
-            value={currName} 
-            onChange={handleNameChange} 
+          <input
+            type="text"
+            value={currName}
+            onChange={(e) => setCurrName(e.target.value)}
           />
         </label>
+      </div>
+
+      <div>
         <label>
           Type:
-          <select value={inputType} onChange={handleTypeChange}>
+          <select
+            value={inputType}
+            onChange={(e) => setInputType(e.target.value)}
+          >
             <option value="Text">Text</option>
             <option value="File">File</option>
           </select>
         </label>
       </div>
-      {/* <Handle
-        type="source"
-        position={Position.Right}
-        // id={`${id}-value`}
-        id={`${id}-output`}
-      /> */}
-      <Handle
-        type="target"
-        position={Position.Left}
-        id={`${id}-target`}
-        style={{ top: '50%', transform: 'translateY(-50%)' }}
-      />
-
-      <Handle
-        type="source"
-        position={Position.Right}
-        id={`${id}-source`}
-        style={{ top: '50%', transform: 'translateY(-50%)' }}
-      />
-    </div>
+    </BaseNode>
   );
-}
+};

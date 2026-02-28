@@ -1,5 +1,7 @@
+// textNode.js
+
 import { useState, useEffect, useRef } from 'react';
-import { Handle, Position } from 'reactflow';
+import { BaseNode } from './baseNode';
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
@@ -10,48 +12,23 @@ export const TextNode = ({ id, data }) => {
     setCurrText(e.target.value);
   };
 
+  // 🔹 Extract variables from {{variable}}
   useEffect(() => {
-    const lines = currText.split('\n');
-    const variableMap = new Map();
+    const regex = /\{\{(.*?)\}\}/g;
+    const matches = [...currText.matchAll(regex)];
 
-    lines.forEach((line, lineIndex) => {
-      const regex = /\{\{(.*?)\}\}/g;
-      const matches = [...line.matchAll(regex)];
+    const unique = [...new Set(matches.map(m => m[1].trim()))];
 
-      matches.forEach(match => {
-        const name = match[1].trim();
-
-        if (!variableMap.has(name)) {
-          variableMap.set(name, lineIndex);
-        }
-      });
-    });
-
-    const uniqueVariables = Array.from(variableMap.entries()).map(
-      ([name, lineIndex]) => ({ name, lineIndex })
-    );
-
-    setVariables(uniqueVariables);
+    setVariables(unique);
   }, [currText]);
 
-  const getLineHeight = () => {
-    if (!textareaRef.current) return 20;
-    const style = window.getComputedStyle(textareaRef.current);
-    return parseInt(style.lineHeight) || 20;
-  };
-
   return (
-    <div
-      style={{
-        minWidth: 220,
-        border: '1px solid black',
-        padding: 10,
-        background: 'white',
-        position: 'relative'
-      }}
+    <BaseNode
+      id={id}
+      title="Text"
+      inputs={variables.map((v) => ({ id: v }))}
+      outputs={[{ id: 'output' }]}
     >
-      <strong>Text</strong>
-
       <textarea
         ref={textareaRef}
         value={currText}
@@ -67,25 +44,6 @@ export const TextNode = ({ id, data }) => {
           e.target.style.height = e.target.scrollHeight + 'px';
         }}
       />
-
-      {/* 🔥 줄 위치 기준 handle 배치 */}
-      {variables.map((variable, index) => (
-        <Handle
-          key={`${variable.name}-${index}`}
-          type="target"
-          position={Position.Left}
-          id={variable.name}
-          style={{
-            top: 40 + variable.lineIndex * getLineHeight()
-          }}
-        />
-      ))}
-
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="output"
-      />
-    </div>
+    </BaseNode>
   );
 };
