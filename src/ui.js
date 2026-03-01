@@ -50,23 +50,33 @@ export const PipelineUI = () => {
   const onDrop = useCallback(
     (event) => {
       event.preventDefault();
-
-      const reactFlowBounds =
-        reactFlowWrapper.current.getBoundingClientRect();
+      event.stopPropagation();
 
       const raw =
         event?.dataTransfer?.getData('application/reactflow');
-      if (!raw) return;
-
-      const appData = JSON.parse(raw);
-      const type = appData?.nodeType;
+      const type = raw
+        ? (() => {
+            try {
+              const appData = JSON.parse(raw);
+              return appData?.nodeType || null;
+            } catch {
+              return null;
+            }
+          })()
+        : event?.dataTransfer?.getData('text/plain');
       if (!type) return;
 
-      if (!reactFlowInstance || !reactFlowWrapper.current) return;
-      const position = reactFlowInstance.project({
-        x: event.clientX - reactFlowBounds.left,
-        y: event.clientY - reactFlowBounds.top,
-      });
+      if (!reactFlowInstance) return;
+      // Use screen coordinates (clientX, clientY) – React Flow converts to flow position
+      const position = reactFlowInstance.screenToFlowPosition
+        ? reactFlowInstance.screenToFlowPosition({
+            x: event.clientX,
+            y: event.clientY,
+          })
+        : reactFlowInstance.project({
+            x: event.clientX,
+            y: event.clientY,
+          });
 
       const nodeID = getNodeID(type);
 
@@ -84,13 +94,16 @@ export const PipelineUI = () => {
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
+    event.stopPropagation();
+    if (event.dataTransfer) event.dataTransfer.dropEffect = 'move';
   }, []);
 
   return (
     <div
       ref={reactFlowWrapper}
       className="w-screen h-[70vh] bg-gray-50"
+      onDragOverCapture={onDragOver}
+      onDropCapture={onDrop}
     >
       <ReactFlow
         nodes={nodes}
@@ -107,12 +120,13 @@ export const PipelineUI = () => {
         snapGrid={[gridSize, gridSize]}
         connectionLineType="smoothstep"
         connectionMode={ConnectionMode.Strict}
-        className="bg-gray-50"
+        className="bg-surface-subtle"
       >
         <Background
           gap={gridSize}
           size={1}
-          color="#e5e7eb"
+          color="#e2e8f0"
+          className="bg-surface-subtle"
         />
         <Controls />
         <MiniMap />

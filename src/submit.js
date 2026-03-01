@@ -27,7 +27,7 @@ export const SubmitButton = () => {
       const data = await response.json();
 
       alert(
-        `Nodes: ${data.nodes}\nEdges: ${data.edges}\nIs DAG: ${data.is_dag}`
+        `Nodes: ${data.num_nodes}\nEdges: ${data.num_edges}\nIs DAG: ${data.is_dag}`
       );
 
     } catch (error) {
@@ -41,49 +41,17 @@ export const SubmitButton = () => {
       <button
         onClick={handleSubmit}
         className="
-          group
-          relative
-          inline-flex
-          items-center
-          justify-center
-          px-10
-          py-3
-          text-sm
-          font-semibold
-          text-white
-          rounded-2xl
-          bg-gradient-to-r
-          from-blue-500
-          via-indigo-500
-          to-purple-600
-          shadow-lg
-          transition-all
-          duration-300
-          hover:shadow-2xl
-          hover:scale-105
-          active:scale-95
-          focus:outline-none
-          focus:ring-4
-          focus:ring-indigo-300
+          inline-flex items-center justify-center
+          px-8 py-3 text-sm font-semibold text-white
+          rounded-node
+          bg-primary-500 hover:bg-primary-600
+          shadow-node hover:shadow-node-hover
+          transition-all duration-200
+          focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2
+          active:scale-[0.98]
         "
       >
-        {/* Glow effect */}
-        <span
-          className="
-            absolute
-            inset-0
-            rounded-2xl
-            bg-white
-            opacity-0
-            group-hover:opacity-10
-            transition-opacity
-            duration-300
-          "
-        />
-
-        <span className="relative tracking-wide">
-          Submit Pipeline
-        </span>
+        Submit Pipeline
       </button>
     </div>
   );

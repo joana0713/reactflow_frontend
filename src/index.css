@@ -2,11 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Design tokens – single source for theming */
+:root {
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-primary: #6366f1;
+  --color-primary-hover: #4f46e5;
+  --color-success: #22c55e;
+  --color-success-hover: #16a34a;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --radius-node: 1rem;
+  --radius-card: 1.25rem;
+  --shadow-node: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-node-hover: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+}
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
 }
 
 body {
-  @apply bg-gray-50 text-gray-800;
+  @apply antialiased font-sans;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* ReactFlow overrides – align with app theme */
+.react-flow__background {
+  background-color: var(--color-bg) !important;
+}
+
+.react-flow__controls {
+  @apply shadow-panel rounded-node border border-edge bg-surface;
+}
+
+.react-flow__controls-button {
+  @apply bg-surface border-edge text-slate-700 hover:bg-slate-50 border-b last:border-b-0;
+}
+
+.react-flow__minimap {
+  @apply rounded-node border border-edge shadow-panel overflow-hidden;
+}
+
+.react-flow__edge-path {
+  stroke: var(--color-border);
+  stroke-width: 2;
+}
+
+.react-flow__connection-line path {
+  stroke: var(--color-primary);
+}
+
+.react-flow__handle {
+  border-width: 2px;
+  border-color: var(--color-surface);
 }

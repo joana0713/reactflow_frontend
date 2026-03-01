@@ -12,18 +12,13 @@ export const BaseNode = ({
   return (
     <div
       className="
-        relative
-        min-w-[220px]
-        bg-white
-        border border-gray-200
-        rounded-2xl
-        shadow-md
-        hover:shadow-xl
-        transition-all
-        duration-200
+        relative min-w-[220px]
+        bg-surface border border-edge rounded-node
+        shadow-node hover:shadow-node-hover
+        transition-all duration-200
       "
     >
-      {/* 🔹 Left Handles */}
+      {/* Left Handles */}
       {inputs.map((input, index) => {
         const customTop = input.style?.top;
 
@@ -37,32 +32,29 @@ export const BaseNode = ({
               top: customTop ?? `${50 + index * 20}%`,
               transform: customTop ? undefined : 'translateY(-50%)'
             }}
-            className="!w-3 !h-3 !bg-blue-500"
+            className="!w-3 !h-3 !bg-primary-500 !border-2 !border-white"
           />
         );
       })}
 
-      {/* 🔹 Header */}
+      {/* Header */}
       <div
         className="
           px-4 py-3
-          border-b border-gray-100
-          bg-gray-50
-          rounded-t-2xl
-          font-semibold
-          text-sm
-          text-gray-700
+          border-b border-edge
+          bg-surface-muted rounded-t-node
+          font-semibold text-sm text-slate-700
         "
       >
         {title}
       </div>
 
-      {/* 🔹 Body */}
-      <div className="p-4 text-sm text-gray-700 min-h-[60px]">
+      {/* Body */}
+      <div className="p-4 text-sm text-slate-700 min-h-[60px]">
         {children}
       </div>
 
-      {/* 🔹 Right Handles */}
+      {/* Right Handles */}
       {outputs.map((output, index) => {
         const customTop = output.style?.top;
 
@@ -76,7 +68,7 @@ export const BaseNode = ({
               top: customTop ?? `${50 + index * 20}%`,
               transform: customTop ? undefined : 'translateY(-50%)'
             }}
-            className="!w-3 !h-3 !bg-green-500"
+            className="!w-3 !h-3 !bg-emerald-500 !border-2 !border-white"
           />
         );
       })}

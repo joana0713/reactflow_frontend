@@ -1,99 +1,76 @@
-import { Handle, Position } from 'reactflow';
+// GenericNode.js – Config-driven node using the shared BaseNode abstraction
 
-export const GenericNode = ({ data, config }) => {
-  return (
-    <div
-      className="
-        relative
-        bg-white
-        border border-gray-200
-        rounded-2xl
-        shadow-md
-        hover:shadow-xl
-        transition-all
-        duration-200
-        min-w-[240px]
-      "
-    >
-      {/* Header */}
-      <div
-        className="
-          px-4
-          py-3
-          bg-gradient-to-r
-          from-gray-50
-          to-gray-100
-          border-b
-          border-gray-200
-          rounded-t-2xl
-          text-sm
-          font-semibold
-          text-gray-700
-        "
-      >
-        {config.label}
-      </div>
+import { useState } from 'react';
+import { BaseNode } from './BaseNode';
+import { FieldRenderer } from './FieldRenderer';
 
-      {/* Body */}
-      <div className="p-4 space-y-4">
-        {config.fields && config.fields.length > 0 ? (
-          <div>
-            {config.fields?.map((field) => (
-              <div key={field.name} className="flex flex-col gap-1">
-                <label className="text-xs font-medium text-gray-500">
-                  {field.label}
-                </label>
+/** Normalize handles to array of { id } for consistent config shape */
+function normalizeHandles(arr) {
+  if (!arr || !Array.isArray(arr)) return [];
+  return arr.map((h) => (typeof h === 'string' ? { id: h } : h));
+}
 
-                <input
-                  type="text"
-                  defaultValue={field.default}
-                  className="
-                    px-3
-                    py-2
-                    text-sm
-                    border
-                    border-gray-200
-                    rounded-lg
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-blue-400
-                    focus:border-transparent
-                    transition
-                  "
-                />
-              </div>
-            ))}
+export const GenericNode = ({ id, data, config }) => {
+  const title = config.title ?? config.label ?? config.type;
+  const rawInputs = config.handles?.inputs ?? config.inputs ?? [];
+  const rawOutputs = config.handles?.outputs ?? config.outputs ?? [];
+  const inputs = normalizeHandles(rawInputs);
+  const outputs = normalizeHandles(rawOutputs);
+  const fields = config.fields ?? [];
+
+  const [fieldValues, setFieldValues] = useState(() => {
+    const initial = {};
+    fields.forEach((f) => {
+      initial[f.name] = data?.[f.name] ?? f.default ?? f.defaultValue ?? '';
+    });
+    return initial;
+  });
+
+  const handleFieldChange = (name, value) => {
+    setFieldValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Unique handle ids per node so React Flow can distinguish connections
+  const inputHandles = inputs.map((h) => ({
+    id: `${id}-in-${h.id}`,
+    style: h.style
+  }));
+  const outputHandles = outputs.map((h) => ({
+    id: `${id}-out-${h.id}`,
+    style: h.style
+  }));
+
+  const body = (
+    <div className="space-y-3">
+      {fields.length > 0 ? (
+        fields.map((field) => (
+          <div key={field.name} className="flex flex-col gap-1">
+            {field.type !== 'checkbox' && (
+              <label className="text-xs font-medium text-slate-500">
+                {field.label}
+              </label>
+            )}
+            <FieldRenderer
+              field={field}
+              value={fieldValues[field.name]}
+              onChange={handleFieldChange}
+            />
           </div>
-        ) : (
-          <div className="text-xs text-gray-400 italic">
-            No configuration
-          </div>
-        )}
-      </div>
-
-      {/* Input Handle */}
-      <Handle
-        type="target"
-        position={Position.Left}
-        className="
-          !w-3 !h-3
-          !bg-blue-500
-          !top-1/2
-          -translate-y-1/2
-        "
-      />
-
-      {/* Output Handle */}
-      <Handle
-        type="source"
-        position={Position.Right}
-        className="
-          !w-3 !h-3
-          !bg-green-500
-          !top-1/2
-          -translate-y-1/2
-        "
-      />
+        ))
+      ) : (
+        <div className="text-xs text-slate-400 italic">No configuration</div>
+      )}
     </div>
+  );
+
+  return (
+    <BaseNode
+      id={id}
+      title={title}
+      inputs={inputHandles}
+      outputs={outputHandles}
+    >
+      {body}
+    </BaseNode>
   );
 };

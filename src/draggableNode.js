@@ -1,33 +1,39 @@
 // draggableNode.js
 
 export const DraggableNode = ({ type, label }) => {
-    const onDragStart = (event, nodeType) => {
-      const appData = { nodeType }
-      event.target.style.cursor = 'grabbing';
-      event.dataTransfer.setData('application/reactflow', JSON.stringify(appData));
-      event.dataTransfer.effectAllowed = 'move';
-    };
-  
-    return (
-      <div
-        className={type}
-        onDragStart={(event) => onDragStart(event, type)}
-        onDragEnd={(event) => (event.target.style.cursor = 'grab')}
-        style={{ 
-          cursor: 'grab', 
-          minWidth: '80px', 
-          height: '60px',
-          display: 'flex', 
-          alignItems: 'center', 
-          borderRadius: '8px',
-          backgroundColor: '#1C2536',
-          justifyContent: 'center', 
-          flexDirection: 'column'
-        }} 
-        draggable
-      >
-          <span style={{ color: '#fff' }}>{label}</span>
-      </div>
-    );
+  const onDragStart = (event, nodeType) => {
+    const appData = { nodeType };
+    event.dataTransfer.setData('application/reactflow', JSON.stringify(appData));
+    event.dataTransfer.setData('text/plain', nodeType);
+    event.dataTransfer.effectAllowed = 'move';
+    if (event.currentTarget) {
+      event.currentTarget.style.cursor = 'grabbing';
+    }
   };
-  
+
+  const onDragEnd = (event) => {
+    if (event.currentTarget) {
+      event.currentTarget.style.cursor = 'grab';
+    }
+  };
+
+  return (
+    <div
+      className="
+        cursor-grab active:cursor-grabbing
+        min-w-[80px] h-12 px-4
+        flex items-center justify-center
+        rounded-lg
+        bg-primary-600 hover:bg-primary-700
+        text-white text-sm font-medium
+        shadow-node hover:shadow-node-hover
+        transition-all duration-200
+      "
+      draggable
+      onDragStart={(e) => onDragStart(e, type)}
+      onDragEnd={onDragEnd}
+    >
+      {label}
+    </div>
+  );
+};

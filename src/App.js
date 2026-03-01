@@ -6,30 +6,34 @@ import { SubmitButton } from './submit';
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+    <div className="min-h-screen flex flex-col bg-surface-subtle">
 
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-8 py-4 shadow-sm">
-        <h1 className="text-lg font-semibold text-gray-700">
-          Pipeline Builder
-        </h1>
+      <header className="bg-surface border-b border-edge shadow-panel">
+        <div className="px-6 py-3 max-w-full">
+          <h1 className="text-xl font-semibold tracking-tight text-slate-800">
+            Pipeline Builder
+          </h1>
+          <p className="text-sm text-slate-500 mt-0.5">
+            Drag nodes onto the canvas and connect them to build your pipeline.
+          </p>
+        </div>
       </header>
 
       {/* Toolbar */}
       <PipelineToolbar />
 
-      {/* Canvas Area */}
-      <div className="flex-1 px-8 py-6">
-        <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+      {/* Canvas Area – min-h-0 lets flex child get a real height so h-full works */}
+      <main className="flex-1 min-h-0 px-6 py-3 flex flex-col">
+        <div className="flex-1 min-h-0 bg-surface rounded-card shadow-panel-elevated border border-edge overflow-hidden">
           <PipelineUI />
         </div>
-      </div>
+      </main>
 
       {/* Submit */}
-      <div className="pb-8">
+      <footer className="py-4 bg-surface-subtle border-t border-edge">
         <SubmitButton />
-      </div>
-
+      </footer>
     </div>
   );
 }
